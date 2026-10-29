@@ -1,0 +1,35 @@
+﻿name: build-windows-exe
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build, test and smoke-test ArchForge.exe
+        shell: pwsh
+        run: ./build_exe.ps1 -NoMirror
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ArchForge-win64
+          path: release/ArchForge-win64.zip
+
+      - name: Publish release (tags only)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release/ArchForge-win64.zip
