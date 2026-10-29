@@ -1,0 +1,394 @@
+[
+  {
+    "variant": "full",
+    "status": "done",
+    "cost_usd": 0.3972,
+    "calls": 145,
+    "cache_hit": 0.899,
+    "minutes": 18.7,
+    "own_tests": {
+      "passed": 44,
+      "total": 45,
+      "ran": true
+    },
+    "probe": {
+      "score": 12,
+      "max": 13,
+      "server_started": true,
+      "checks": [
+        {
+          "id": "C01",
+          "name": "spec contract: GET /play -> 200 with integer gameId",
+          "ok": true,
+          "detail": "200 {'gameId': 1, 'state': 'PLAYING', 'score': 0, 'totalQuestions': 8, 'question': {'prompt': '5/6 + 1/3 = ?', 'options': ['4/6', '7/6', '6/9', '5/9']}}"
+        },
+        {
+          "id": "C02",
+          "name": "fresh install playable: first question has >= 2 options and no correctAnswer leak",
+          "ok": true,
+          "detail": "200"
+        },
+        {
+          "id": "C03",
+          "name": "answer endpoint judges an answer (POST /games/:id/answers -> correct: boolean)",
+          "ok": true,
+          "detail": "200 {'correct': False, 'submittedAnswer': '4/6', 'correctAnswer': '7/6', 'score': 0, 'totalQuestions': 8, 'state': 'PLAYING', 'nextQuestion': {'prompt': '2/3 - "
+        },
+        {
+          "id": "C04",
+          "name": "score endpoint (GET /games/:id/score -> numeric score)",
+          "ok": true,
+          "detail": "200 {'gameId': 1, 'score': 0, 'totalQuestions': 8, 'percent': 0, 'state': 'PLAYING'}"
+        },
+        {
+          "id": "C05",
+          "name": "pause works and blocks questions (pause 200, question 409)",
+          "ok": false,
+          "detail": "pause 200, question while paused 200"
+        },
+        {
+          "id": "C06",
+          "name": "resume works (Paused -> Playing)",
+          "ok": true,
+          "detail": "resume 200"
+        },
+        {
+          "id": "C07",
+          "name": "quit from Paused ends the game; resume afterwards is rejected (409)",
+          "ok": true,
+          "detail": "quit 200, resume after quit 409"
+        },
+        {
+          "id": "C08",
+          "name": "help (GET /help -> 200)",
+          "ok": true,
+          "detail": "200"
+        },
+        {
+          "id": "C09",
+          "name": "admin security: no token -> 401/403, correct token -> 200",
+          "ok": true,
+          "detail": "no token 401, token 200"
+        },
+        {
+          "id": "C10",
+          "name": "admin can replace the question bank and new games use it",
+          "ok": true,
+          "detail": "PUT 200, new game uses bank: True"
+        },
+        {
+          "id": "C11",
+          "name": "fair play: correct answer is not always in the same option position",
+          "ok": true,
+          "detail": "correct-answer positions [3, 2, 2, 2, 1, 1, 3, 1]"
+        },
+        {
+          "id": "C12",
+          "name": "durability: question bank survives a server restart (same data file)",
+          "ok": true,
+          "detail": "after restart: 200"
+        },
+        {
+          "id": "C13",
+          "name": "error format: unknown game -> 404 with {error: {code}}",
+          "ok": true,
+          "detail": "404 {'error': {'code': 'GAME_NOT_FOUND', 'message': 'Game not found'}}"
+        }
+      ]
+    }
+  },
+  {
+    "variant": "no-lint",
+    "status": "done",
+    "cost_usd": 0.2945,
+    "calls": 145,
+    "cache_hit": 0.91,
+    "minutes": 12.2,
+    "own_tests": {
+      "passed": 52,
+      "total": 52,
+      "ran": true
+    },
+    "probe": {
+      "score": 2,
+      "max": 13,
+      "server_started": true,
+      "checks": [
+        {
+          "id": "C01",
+          "name": "spec contract: GET /play -> 200 with integer gameId",
+          "ok": false,
+          "detail": "200 {'gameId': '35787cbd-570d-457e-90b6-d988fc371069', 'score': 0, 'state': 'PLAYING', 'totalQuestions': 8, 'answered': 0, 'question': {'id': 'q8', 'prompt': 'W"
+        },
+        {
+          "id": "C02",
+          "name": "fresh install playable: first question has >= 2 options and no correctAnswer leak",
+          "ok": false,
+          "detail": ""
+        },
+        {
+          "id": "C03",
+          "name": "answer endpoint judges an answer (POST /games/:id/answers -> correct: boolean)",
+          "ok": false,
+          "detail": ""
+        },
+        {
+          "id": "C04",
+          "name": "score endpoint (GET /games/:id/score -> numeric score)",
+          "ok": false,
+          "detail": ""
+        },
+        {
+          "id": "C05",
+          "name": "pause works and blocks questions (pause 200, question 409)",
+          "ok": false,
+          "detail": ""
+        },
+        {
+          "id": "C06",
+          "name": "resume works (Paused -> Playing)",
+          "ok": false,
+          "detail": ""
+        },
+        {
+          "id": "C07",
+          "name": "quit from Paused ends the game; resume afterwards is rejected (409)",
+          "ok": false,
+          "detail": ""
+        },
+        {
+          "id": "C08",
+          "name": "help (GET /help -> 200)",
+          "ok": false,
+          "detail": "404"
+        },
+        {
+          "id": "C09",
+          "name": "admin security: no token -> 401/403, correct token -> 200",
+          "ok": true,
+          "detail": "no token 401, token 200"
+        },
+        {
+          "id": "C10",
+          "name": "admin can replace the question bank and new games use it",
+          "ok": false,
+          "detail": "PUT 400, new game uses bank: False"
+        },
+        {
+          "id": "C11",
+          "name": "fair play: correct answer is not always in the same option position",
+          "ok": false,
+          "detail": "correct-answer positions []"
+        },
+        {
+          "id": "C12",
+          "name": "durability: question bank survives a server restart (same data file)",
+          "ok": false,
+          "detail": "skipped: bank could not be replaced"
+        },
+        {
+          "id": "C13",
+          "name": "error format: unknown game -> 404 with {error: {code}}",
+          "ok": true,
+          "detail": "404 {'error': {'code': 'GAME_NOT_FOUND', 'message': 'No game with id 987654'}}"
+        }
+      ]
+    }
+  },
+  {
+    "variant": "no-tests",
+    "status": "done",
+    "cost_usd": 0.2828,
+    "calls": 131,
+    "cache_hit": 0.922,
+    "minutes": 11.9,
+    "own_tests": {
+      "passed": 0,
+      "total": 0,
+      "ran": false
+    },
+    "probe": {
+      "score": 12,
+      "max": 13,
+      "server_started": true,
+      "checks": [
+        {
+          "id": "C01",
+          "name": "spec contract: GET /play -> 200 with integer gameId",
+          "ok": true,
+          "detail": "200 {'gameId': 1, 'state': 'PLAYING'}"
+        },
+        {
+          "id": "C02",
+          "name": "fresh install playable: first question has >= 2 options and no correctAnswer leak",
+          "ok": true,
+          "detail": "200"
+        },
+        {
+          "id": "C03",
+          "name": "answer endpoint judges an answer (POST /games/:id/answers -> correct: boolean)",
+          "ok": true,
+          "detail": "200 {'correct': False, 'correctAnswer': '5/6', 'score': 0, 'state': 'PLAYING'}"
+        },
+        {
+          "id": "C04",
+          "name": "score endpoint (GET /games/:id/score -> numeric score)",
+          "ok": true,
+          "detail": "200 {'gameId': 1, 'score': 0, 'totalQuestions': 8, 'state': 'PLAYING'}"
+        },
+        {
+          "id": "C05",
+          "name": "pause works and blocks questions (pause 200, question 409)",
+          "ok": true,
+          "detail": "pause 200, question while paused 409"
+        },
+        {
+          "id": "C06",
+          "name": "resume works (Paused -> Playing)",
+          "ok": true,
+          "detail": "resume 200"
+        },
+        {
+          "id": "C07",
+          "name": "quit from Paused ends the game; resume afterwards is rejected (409)",
+          "ok": true,
+          "detail": "quit 200, resume after quit 409"
+        },
+        {
+          "id": "C08",
+          "name": "help (GET /help -> 200)",
+          "ok": true,
+          "detail": "200"
+        },
+        {
+          "id": "C09",
+          "name": "admin security: no token -> 401/403, correct token -> 200",
+          "ok": true,
+          "detail": "no token 401, token 200"
+        },
+        {
+          "id": "C10",
+          "name": "admin can replace the question bank and new games use it",
+          "ok": true,
+          "detail": "PUT 200, new game uses bank: True"
+        },
+        {
+          "id": "C11",
+          "name": "fair play: correct answer is not always in the same option position",
+          "ok": false,
+          "detail": "correct-answer positions [0, 0, 0, 0, 0, 0, 0, 0]"
+        },
+        {
+          "id": "C12",
+          "name": "durability: question bank survives a server restart (same data file)",
+          "ok": true,
+          "detail": "after restart: 200"
+        },
+        {
+          "id": "C13",
+          "name": "error format: unknown game -> 404 with {error: {code}}",
+          "ok": true,
+          "detail": "404 {'error': {'code': 'GAME_NOT_FOUND', 'message': 'Game not found.'}}"
+        }
+      ]
+    }
+  },
+  {
+    "variant": "single-agent",
+    "status": "done",
+    "cost_usd": 0.0728,
+    "calls": 50,
+    "cache_hit": 0.987,
+    "minutes": 4.0,
+    "own_tests": {
+      "passed": 28,
+      "total": 28,
+      "ran": true
+    },
+    "probe": {
+      "score": 1,
+      "max": 13,
+      "server_started": true,
+      "checks": [
+        {
+          "id": "C01",
+          "name": "spec contract: GET /play -> 200 with integer gameId",
+          "ok": false,
+          "detail": "404 None"
+        },
+        {
+          "id": "C02",
+          "name": "fresh install playable: first question has >= 2 options and no correctAnswer leak",
+          "ok": false,
+          "detail": ""
+        },
+        {
+          "id": "C03",
+          "name": "answer endpoint judges an answer (POST /games/:id/answers -> correct: boolean)",
+          "ok": false,
+          "detail": ""
+        },
+        {
+          "id": "C04",
+          "name": "score endpoint (GET /games/:id/score -> numeric score)",
+          "ok": false,
+          "detail": ""
+        },
+        {
+          "id": "C05",
+          "name": "pause works and blocks questions (pause 200, question 409)",
+          "ok": false,
+          "detail": ""
+        },
+        {
+          "id": "C06",
+          "name": "resume works (Paused -> Playing)",
+          "ok": false,
+          "detail": ""
+        },
+        {
+          "id": "C07",
+          "name": "quit from Paused ends the game; resume afterwards is rejected (409)",
+          "ok": false,
+          "detail": ""
+        },
+        {
+          "id": "C08",
+          "name": "help (GET /help -> 200)",
+          "ok": false,
+          "detail": "404"
+        },
+        {
+          "id": "C09",
+          "name": "admin security: no token -> 401/403, correct token -> 200",
+          "ok": true,
+          "detail": "no token 403, token 200"
+        },
+        {
+          "id": "C10",
+          "name": "admin can replace the question bank and new games use it",
+          "ok": false,
+          "detail": "PUT 404, new game uses bank: False"
+        },
+        {
+          "id": "C11",
+          "name": "fair play: correct answer is not always in the same option position",
+          "ok": false,
+          "detail": "correct-answer positions []"
+        },
+        {
+          "id": "C12",
+          "name": "durability: question bank survives a server restart (same data file)",
+          "ok": false,
+          "detail": "skipped: bank could not be replaced"
+        },
+        {
+          "id": "C13",
+          "name": "error format: unknown game -> 404 with {error: {code}}",
+          "ok": false,
+          "detail": "404 None"
+        }
+      ]
+    }
+  }
+]

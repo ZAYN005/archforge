@@ -1,0 +1,28 @@
+# --- secrets: never commit ---
+.env
+*.env
+.env.*
+secrets*
+*.key
+
+# --- run outputs and logs (may contain prompts/spec text; regenerated each run) ---
+runs/
+output/
+logs/
+*.jsonl
+
+# --- Python ---
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# --- build artifacts (the .exe goes to GitHub Releases, not into git) ---
+build/
+dist/
+
+# --- Node (generated projects) ---
+node_modules/
+release/
+*.zip

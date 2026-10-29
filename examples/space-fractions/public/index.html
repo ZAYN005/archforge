@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Space Fractions</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="stars" class="stars" aria-hidden="true"></div>
+
+  <main id="app" class="app">
+    <!-- Screen: Intro movie -->
+    <section id="screen-intro" class="screen is-active">
+      <div class="intro-rocket" aria-hidden="true">🚀</div>
+      <h1 class="intro-title">Space Fractions</h1>
+      <p class="intro-subtitle">Blast off and master fractions across the galaxy!</p>
+      <div class="intro-actions">
+        <button id="btn-start" class="btn btn-primary">Start Mission</button>
+        <button id="btn-skip" class="btn btn-ghost">Skip</button>
+      </div>
+    </section>
+
+    <!-- Screen: Main menu -->
+    <section id="screen-menu" class="screen">
+      <h1 class="screen-title">Main Menu</h1>
+      <div class="menu-actions">
+        <button id="btn-play" class="btn btn-primary">▶ Play</button>
+        <button id="btn-help" class="btn btn-secondary">? Help</button>
+        <button id="btn-admin" class="btn btn-secondary">⚙ Admin</button>
+      </div>
+    </section>
+
+    <!-- Screen: Question -->
+    <section id="screen-question" class="screen">
+      <div class="hud">
+        <div class="hud-progress">
+          <span id="question-number">1</span>/<span id="question-total">1</span>
+        </div>
+        <div class="hud-score">Score: <span id="live-score">0</span></div>
+        <div class="hud-state" id="live-state">PLAYING</div>
+      </div>
+      <p id="prompt" class="prompt"></p>
+      <div id="options" class="options" role="group" aria-label="Answer options"></div>
+      <div class="controls">
+        <button id="btn-pause" class="btn btn-secondary">⏸ Pause</button>
+        <button id="btn-resume" class="btn btn-secondary" disabled>▶ Resume</button>
+        <button id="btn-quit" class="btn btn-danger">✖ Quit</button>
+      </div>
+      <p id="answer-feedback" class="feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- Screen: Paused -->
+    <section id="screen-paused" class="screen">
+      <h1 class="screen-title">Mission Paused</h1>
+      <p>Take a breath, cadet. Your progress is saved.</p>
+      <button id="btn-resume-full" class="btn btn-primary">▶ Resume</button>
+    </section>
+
+    <!-- Screen: Ending -->
+    <section id="screen-ending" class="screen">
+      <h1 class="screen-title">Mission Complete</h1>
+      <div id="ending-emoticon" class="ending-emoticon" aria-hidden="true">🛸</div>
+      <p id="final-score" class="final-score"></p>
+      <p id="final-feedback" class="feedback"></p>
+      <div class="menu-actions">
+        <button id="btn-again" class="btn btn-primary">Play Again</button>
+        <button id="btn-menu" class="btn btn-secondary">Main Menu</button>
+      </div>
+    </section>
+
+    <!-- Screen: Help -->
+    <section id="screen-help" class="screen">
+      <h1 id="help-title" class="screen-title">Help</h1>
+      <div class="help-columns">
+        <div>
+          <h2>Rules</h2>
+          <ul id="help-rules"></ul>
+        </div>
+        <div>
+          <h2>Controls</h2>
+          <ul id="help-controls"></ul>
+        </div>
+      </div>
+      <button id="btn-help-back" class="btn btn-secondary">Back</button>
+    </section>
+
+    <!-- Screen: Admin -->
+    <section id="screen-admin" class="screen">
+      <h1 class="screen-title">Admin Console</h1>
+      <label class="field">
+        <span>Admin token</span>
+        <input id="admin-token" type="password" placeholder="x-admin-token" autocomplete="off" />
+      </label>
+      <label class="field">
+        <span>Question bank (JSON array)</span>
+        <textarea id="admin-questions" rows="10" spellcheck="false" placeholder='[{"prompt":"1/2 + 1/4 = ?","options":["3/4","1/6","1/8","1/3"],"correctAnswer":"3/4"}]'></textarea>
+      </label>
+      <div class="menu-actions">
+        <button id="btn-admin-load" class="btn btn-secondary">Load current</button>
+        <button id="btn-admin-save" class="btn btn-primary">Replace bank</button>
+        <button id="btn-admin-back" class="btn btn-ghost">Back</button>
+      </div>
+      <p id="admin-feedback" class="feedback" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

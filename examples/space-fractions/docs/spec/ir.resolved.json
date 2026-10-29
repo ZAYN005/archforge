@@ -1,0 +1,1986 @@
+{
+  "meta": {
+    "ir_version": "1.0",
+    "generator": "archforge.spec",
+    "sources": [
+      {
+        "file": "Architecture_Documentation.md",
+        "sha256_16": "6855cebc7fe63f64"
+      },
+      {
+        "file": "Architecture_View.md",
+        "sha256_16": "d8977790af9a015f"
+      }
+    ],
+    "stage": "resolved"
+  },
+  "system": {
+    "name": "Space Fractions",
+    "summary": "The Space Fractions system is a web-based, interactive learning tool designed to improve fraction-solving skills for sixth-grade students. The system consists of an introductory movie, a main menu, a series of fraction questions, and an ending scene with feedback. The architecture will follow a microservices approach, with separate components for the game logic, question management, and user interface. The system will be deployed on a cloud-based infrastructure, ensuring scalability and availability.",
+    "style": "Microservices",
+    "deployment": "Cloud-based infrastructure",
+    "experience_flow": [
+      "introductory movie",
+      "main menu",
+      "series of fraction questions",
+      "ending scene with feedback"
+    ],
+    "referenced_inputs": [
+      {
+        "name": "Requirements document",
+        "src": "Architecture_Documentation.md:3"
+      }
+    ],
+    "summary_src": "Architecture_Documentation.md:7",
+    "experience_flow_src": "Architecture_Documentation.md:7",
+    "style_src": "Architecture_Documentation.md:9",
+    "declared_diagram_count": 11,
+    "declared_diagram_count_src": "Architecture_Documentation.md:3"
+  },
+  "requirements": [
+    {
+      "id": "ASR-1",
+      "type": "ASR",
+      "text": "Data durability",
+      "origin": "spec",
+      "in_traceability": true,
+      "diagrams": [
+        "DeploymentDiagram"
+      ],
+      "components": [
+        "QuestionComponent"
+      ],
+      "artifacts": [
+        "sql/question_ddl.sql"
+      ],
+      "test_types": [
+        "Unit testing",
+        "Integration testing"
+      ],
+      "mentions": [
+        "Architecture_Documentation.md:24",
+        "Architecture_Documentation.md:35",
+        "Architecture_Documentation.md:52",
+        "Architecture_Documentation.md:55",
+        "Architecture_Documentation.md:61",
+        "Architecture_Documentation.md:62",
+        "Architecture_Documentation.md:63",
+        "Architecture_Documentation.md:78",
+        "Architecture_Documentation.md:221",
+        "Architecture_Documentation.md:307"
+      ],
+      "text_src": "Architecture_Documentation.md:24",
+      "src": "Architecture_Documentation.md:35",
+      "rationale": "Ensures that question data is persisted and recoverable"
+    },
+    {
+      "id": "ASR-2",
+      "type": "ASR",
+      "text": "security",
+      "origin": "spec",
+      "in_traceability": true,
+      "diagrams": [
+        "UseCaseDiagram",
+        "ComponentDiagram"
+      ],
+      "components": [
+        "UserComponent"
+      ],
+      "artifacts": [
+        "openapi.yaml"
+      ],
+      "test_types": [
+        "Penetration testing",
+        "Vulnerability scanning"
+      ],
+      "mentions": [
+        "Architecture_Documentation.md:26",
+        "Architecture_Documentation.md:54",
+        "Architecture_Documentation.md:57",
+        "Architecture_Documentation.md:59",
+        "Architecture_Documentation.md:78",
+        "Architecture_Documentation.md:221"
+      ],
+      "text_src": "Architecture_Documentation.md:26",
+      "origin_trace": "resolved"
+    },
+    {
+      "id": "FR-1",
+      "type": "FR",
+      "text": "Play game",
+      "origin": "spec",
+      "in_traceability": true,
+      "diagrams": [
+        "UseCaseDiagram"
+      ],
+      "components": [
+        "GameComponent"
+      ],
+      "artifacts": [
+        "openapi.yaml"
+      ],
+      "test_types": [],
+      "mentions": [
+        "Architecture_Documentation.md:33",
+        "Architecture_Documentation.md:305"
+      ],
+      "src": "Architecture_Documentation.md:33",
+      "rationale": "Allows users to play the game"
+    },
+    {
+      "id": "NFR-1",
+      "type": "NFR",
+      "text": "Performance",
+      "origin": "spec",
+      "in_traceability": true,
+      "diagrams": [
+        "SequenceDiagram1"
+      ],
+      "components": [
+        "GameComponent"
+      ],
+      "artifacts": [
+        "internal.proto"
+      ],
+      "test_types": [
+        "Load testing",
+        "Stress testing"
+      ],
+      "mentions": [
+        "Architecture_Documentation.md:25",
+        "Architecture_Documentation.md:34",
+        "Architecture_Documentation.md:53",
+        "Architecture_Documentation.md:56",
+        "Architecture_Documentation.md:58",
+        "Architecture_Documentation.md:60",
+        "Architecture_Documentation.md:78",
+        "Architecture_Documentation.md:221",
+        "Architecture_Documentation.md:306"
+      ],
+      "text_src": "Architecture_Documentation.md:25",
+      "src": "Architecture_Documentation.md:34",
+      "rationale": "Ensures the game responds quickly to user input"
+    },
+    {
+      "id": "FR-2",
+      "type": "FR",
+      "text": "View Score",
+      "origin": "inferred",
+      "in_traceability": true,
+      "diagrams": [
+        "UseCaseDiagram"
+      ],
+      "components": [],
+      "artifacts": [
+        "openapi.yaml"
+      ],
+      "test_types": [
+        "Unit testing",
+        "Integration testing"
+      ],
+      "mentions": [],
+      "src": "Architecture_View.md:4",
+      "actors": [
+        "EndUser"
+      ]
+    },
+    {
+      "id": "FR-3",
+      "type": "FR",
+      "text": "Update Questions",
+      "origin": "inferred",
+      "in_traceability": true,
+      "diagrams": [
+        "UseCaseDiagram"
+      ],
+      "components": [],
+      "artifacts": [
+        "openapi.yaml"
+      ],
+      "test_types": [
+        "Unit testing",
+        "Integration testing"
+      ],
+      "mentions": [],
+      "src": "Architecture_View.md:4",
+      "actors": [
+        "Admin"
+      ]
+    },
+    {
+      "id": "FR-4",
+      "type": "FR",
+      "text": "View Help",
+      "origin": "inferred",
+      "in_traceability": true,
+      "diagrams": [
+        "UseCaseDiagram"
+      ],
+      "components": [],
+      "artifacts": [
+        "openapi.yaml"
+      ],
+      "test_types": [
+        "Unit testing",
+        "Integration testing"
+      ],
+      "mentions": [],
+      "src": "Architecture_View.md:4",
+      "actors": [
+        "EndUser"
+      ]
+    },
+    {
+      "id": "FR-5",
+      "type": "FR",
+      "origin": "inferred",
+      "in_traceability": true,
+      "text": "Experience flow: introductory movie -> main menu -> series of fraction questions -> ending scene with feedback",
+      "diagrams": [],
+      "components": [
+        "GameComponent"
+      ],
+      "artifacts": [
+        "ui"
+      ],
+      "test_types": [
+        "E2E testing"
+      ],
+      "mentions": [],
+      "src": "Architecture_Documentation.md:7"
+    }
+  ],
+  "traceability_declared": {
+    "table": [
+      {
+        "Requirement ID": "FR-1",
+        "Short Text": "Play game",
+        "Diagram(s)": "UseCaseDiagram",
+        "Component(s)": "GameComponent",
+        "Artifact filename(s)": "openapi.yaml",
+        "Rationale": "Allows users to play the game",
+        "src": "Architecture_Documentation.md:33"
+      },
+      {
+        "Requirement ID": "NFR-1",
+        "Short Text": "Performance",
+        "Diagram(s)": "SequenceDiagram1",
+        "Component(s)": "GameComponent",
+        "Artifact filename(s)": "internal.proto",
+        "Rationale": "Ensures the game responds quickly to user input",
+        "src": "Architecture_Documentation.md:34"
+      },
+      {
+        "Requirement ID": "ASR-1",
+        "Short Text": "Data durability",
+        "Diagram(s)": "DeploymentDiagram",
+        "Component(s)": "QuestionComponent",
+        "Artifact filename(s)": "sql/question_ddl.sql",
+        "Rationale": "Ensures that question data is persisted and recoverable",
+        "src": "Architecture_Documentation.md:35"
+      }
+    ],
+    "csv": [
+      {
+        "Requirement ID": "FR-1",
+        "Short Text": "Play game",
+        "Diagram(s)": "UseCaseDiagram",
+        "Component(s)": "GameComponent",
+        "Artifact filename(s)": "openapi.yaml",
+        "Rationale": "Allows users to play the game",
+        "src": "Architecture_Documentation.md:305"
+      },
+      {
+        "Requirement ID": "NFR-1",
+        "Short Text": "Performance",
+        "Diagram(s)": "SequenceDiagram1",
+        "Component(s)": "GameComponent",
+        "Artifact filename(s)": "internal.proto",
+        "Rationale": "Ensures the game responds quickly to user input",
+        "src": "Architecture_Documentation.md:306"
+      },
+      {
+        "Requirement ID": "ASR-1",
+        "Short Text": "Data durability",
+        "Diagram(s)": "DeploymentDiagram",
+        "Component(s)": "QuestionComponent",
+        "Artifact filename(s)": "sql/question_ddl.sql",
+        "Rationale": "Ensures that question data is persisted and recoverable",
+        "src": "Architecture_Documentation.md:307"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "GameComponent",
+      "responsibility": "responsible for game logic and user interaction",
+      "in_text": true,
+      "in_component_diagram": true,
+      "text_src": "Architecture_Documentation.md:40",
+      "diagram_src": "Architecture_View.md:167",
+      "package": "Game",
+      "entity": "Game",
+      "deployment_node": "GameServer",
+      "container": "GameContainer",
+      "depends_on": [
+        "AdminComponent",
+        "QuestionComponent",
+        "UserComponent"
+      ]
+    },
+    {
+      "name": "QuestionComponent",
+      "responsibility": "responsible for question management and data persistence",
+      "in_text": true,
+      "in_component_diagram": true,
+      "text_src": "Architecture_Documentation.md:41",
+      "diagram_src": "Architecture_View.md:168",
+      "package": "Game",
+      "entity": "Question",
+      "deployment_node": "QuestionServer",
+      "container": "QuestionContainer",
+      "depends_on": [
+        "GameComponent"
+      ]
+    },
+    {
+      "name": "UserComponent",
+      "responsibility": "responsible for user authentication and authorization",
+      "in_text": true,
+      "in_component_diagram": true,
+      "text_src": "Architecture_Documentation.md:42",
+      "diagram_src": "Architecture_View.md:169",
+      "package": "User",
+      "entity": "User",
+      "deployment_node": "UserClient",
+      "container": "UserContainer",
+      "depends_on": [
+        "GameComponent"
+      ]
+    },
+    {
+      "name": "AdminComponent",
+      "responsibility": "handles update questions for the Admin actor",
+      "in_text": false,
+      "in_component_diagram": true,
+      "diagram_src": "Architecture_View.md:170",
+      "package": "Admin",
+      "entity": "Admin",
+      "deployment_node": "AdminClient",
+      "container": "AdminContainer",
+      "depends_on": [
+        "GameComponent"
+      ],
+      "responsibility_origin": "inferred"
+    }
+  ],
+  "actors": [
+    {
+      "id": "EndUser",
+      "name": "End User",
+      "src": "Architecture_View.md:4"
+    },
+    {
+      "id": "Admin",
+      "name": "Admin",
+      "src": "Architecture_View.md:4"
+    }
+  ],
+  "use_cases": [
+    {
+      "id": "PlayGame",
+      "name": "Play Game",
+      "actors": [
+        "EndUser"
+      ],
+      "src": "Architecture_View.md:4",
+      "requirement": "FR-1"
+    },
+    {
+      "id": "ViewScore",
+      "name": "View Score",
+      "actors": [
+        "EndUser"
+      ],
+      "src": "Architecture_View.md:4",
+      "requirement": "FR-2"
+    },
+    {
+      "id": "UpdateQuestions",
+      "name": "Update Questions",
+      "actors": [
+        "Admin"
+      ],
+      "src": "Architecture_View.md:4",
+      "requirement": "FR-3"
+    },
+    {
+      "id": "ViewHelp",
+      "name": "View Help",
+      "actors": [
+        "EndUser"
+      ],
+      "src": "Architecture_View.md:4",
+      "requirement": "FR-4"
+    }
+  ],
+  "entities": [
+    {
+      "name": "Game",
+      "attributes": [
+        {
+          "visibility": "-",
+          "name": "id",
+          "type": "int",
+          "type_origin": "resolved"
+        },
+        {
+          "visibility": "-",
+          "name": "score",
+          "type": "int"
+        }
+      ],
+      "methods": [
+        {
+          "visibility": "+",
+          "name": "play",
+          "params": [],
+          "returns": "void"
+        },
+        {
+          "visibility": "+",
+          "name": "viewScore",
+          "params": [],
+          "returns": "int"
+        }
+      ],
+      "relations": [
+        {
+          "from": "Game",
+          "arrow": "--*",
+          "to": "Question",
+          "line": 49
+        },
+        {
+          "from": "User",
+          "arrow": "--*",
+          "to": "Game",
+          "line": 50
+        }
+      ],
+      "src": "Architecture_View.md:25"
+    },
+    {
+      "name": "Question",
+      "attributes": [
+        {
+          "visibility": "-",
+          "name": "id",
+          "type": "int",
+          "type_origin": "resolved"
+        },
+        {
+          "visibility": "-",
+          "name": "prompt",
+          "type": "string"
+        },
+        {
+          "visibility": "-",
+          "name": "options",
+          "type": "List<string>"
+        },
+        {
+          "visibility": "-",
+          "name": "correctAnswer",
+          "type": "Fraction",
+          "origin": "resolved"
+        }
+      ],
+      "methods": [
+        {
+          "visibility": "+",
+          "name": "getPrompt",
+          "params": [],
+          "returns": "string"
+        },
+        {
+          "visibility": "+",
+          "name": "getOptions",
+          "params": [],
+          "returns": "List<string>"
+        },
+        {
+          "visibility": "+",
+          "name": "checkAnswer",
+          "params": [
+            "answer: Fraction"
+          ],
+          "returns": "boolean",
+          "origin": "resolved"
+        },
+        {
+          "visibility": "+",
+          "name": "updateQuestions",
+          "params": [
+            "questions: List<Question>"
+          ],
+          "returns": "void",
+          "origin": "resolved"
+        }
+      ],
+      "relations": [
+        {
+          "from": "Game",
+          "arrow": "--*",
+          "to": "Question",
+          "line": 49
+        },
+        {
+          "from": "Admin",
+          "arrow": "--*",
+          "to": "Question",
+          "line": 51
+        }
+      ],
+      "src": "Architecture_View.md:31"
+    },
+    {
+      "name": "User",
+      "attributes": [
+        {
+          "visibility": "-",
+          "name": "id",
+          "type": "int",
+          "type_origin": "resolved"
+        },
+        {
+          "visibility": "-",
+          "name": "username",
+          "type": "string"
+        }
+      ],
+      "methods": [
+        {
+          "visibility": "+",
+          "name": "playGame",
+          "params": [
+            "game: Game"
+          ],
+          "returns": "void"
+        },
+        {
+          "visibility": "+",
+          "name": "viewScore",
+          "params": [
+            "game: Game"
+          ],
+          "returns": "int"
+        }
+      ],
+      "relations": [
+        {
+          "from": "User",
+          "arrow": "--*",
+          "to": "Game",
+          "line": 50
+        }
+      ],
+      "src": "Architecture_View.md:38"
+    },
+    {
+      "name": "Admin",
+      "attributes": [
+        {
+          "visibility": "-",
+          "name": "id",
+          "type": "int",
+          "type_origin": "resolved"
+        },
+        {
+          "visibility": "-",
+          "name": "username",
+          "type": "string"
+        }
+      ],
+      "methods": [
+        {
+          "visibility": "+",
+          "name": "updateQuestions",
+          "params": [
+            "questions: List<Question>"
+          ],
+          "returns": "void"
+        }
+      ],
+      "relations": [
+        {
+          "from": "Admin",
+          "arrow": "--*",
+          "to": "Question",
+          "line": 51
+        }
+      ],
+      "src": "Architecture_View.md:44"
+    }
+  ],
+  "state_machine": {
+    "states": [
+      "Playing",
+      "Paused",
+      "GameOver"
+    ],
+    "initial": "Playing",
+    "final": [
+      "GameOver"
+    ],
+    "transitions": [
+      {
+        "from": "Playing",
+        "to": "Paused",
+        "trigger": "pause()",
+        "line": 73
+      },
+      {
+        "from": "Paused",
+        "to": "Playing",
+        "trigger": "resume()",
+        "line": 74
+      },
+      {
+        "from": "Playing",
+        "to": "GameOver",
+        "trigger": "gameOver()",
+        "line": 75
+      },
+      {
+        "from": "Paused",
+        "to": "GameOver",
+        "trigger": "quit()",
+        "origin": "resolved"
+      }
+    ],
+    "src": "Architecture_View.md:68"
+  },
+  "activity": [
+    {
+      "type": "start",
+      "line": 83,
+      "src": "Architecture_View.md:83"
+    },
+    {
+      "type": "action",
+      "text": "play game",
+      "line": 84,
+      "src": "Architecture_View.md:84"
+    },
+    {
+      "type": "decision",
+      "text": "game over?",
+      "branch": "yes",
+      "line": 85,
+      "src": "Architecture_View.md:85"
+    },
+    {
+      "type": "action",
+      "text": "game over",
+      "line": 86,
+      "src": "Architecture_View.md:86"
+    },
+    {
+      "type": "else",
+      "line": 87,
+      "src": "Architecture_View.md:87"
+    },
+    {
+      "type": "action",
+      "text": "continue playing",
+      "line": 88,
+      "src": "Architecture_View.md:88"
+    },
+    {
+      "type": "endif",
+      "line": 89,
+      "src": "Architecture_View.md:89"
+    },
+    {
+      "type": "action",
+      "text": "calculate score",
+      "line": 90,
+      "src": "Architecture_View.md:90"
+    },
+    {
+      "type": "action",
+      "text": "display score",
+      "line": 91,
+      "src": "Architecture_View.md:91"
+    },
+    {
+      "type": "stop",
+      "line": 92,
+      "src": "Architecture_View.md:92"
+    }
+  ],
+  "interactions": [
+    {
+      "diagram": "SequenceDiagram1",
+      "participants": [
+        "User",
+        "Game",
+        "Question"
+      ],
+      "scenario": "",
+      "messages": [
+        {
+          "from": "User",
+          "to": "Game",
+          "label": "play()",
+          "kind": "call",
+          "line": 101,
+          "src": "Architecture_View.md:101"
+        },
+        {
+          "from": "Game",
+          "to": "Question",
+          "label": "getPrompt()",
+          "kind": "call",
+          "line": 102,
+          "src": "Architecture_View.md:102"
+        },
+        {
+          "from": "Question",
+          "to": "Game",
+          "label": "return prompt",
+          "kind": "return",
+          "line": 103,
+          "src": "Architecture_View.md:103"
+        },
+        {
+          "from": "Game",
+          "to": "User",
+          "label": "display prompt",
+          "kind": "call",
+          "line": 104,
+          "src": "Architecture_View.md:104"
+        },
+        {
+          "from": "User",
+          "to": "Game",
+          "label": "submit answer",
+          "kind": "call",
+          "line": 105,
+          "src": "Architecture_View.md:105"
+        },
+        {
+          "from": "Game",
+          "to": "Question",
+          "label": "check answer",
+          "kind": "call",
+          "line": 106,
+          "src": "Architecture_View.md:106"
+        },
+        {
+          "from": "Question",
+          "to": "Game",
+          "label": "return result",
+          "kind": "return",
+          "line": 107,
+          "src": "Architecture_View.md:107"
+        },
+        {
+          "from": "Game",
+          "to": "User",
+          "label": "display result",
+          "kind": "call",
+          "line": 108,
+          "src": "Architecture_View.md:108"
+        }
+      ],
+      "src": "Architecture_View.md:97"
+    },
+    {
+      "diagram": "SequenceDiagram2",
+      "participants": [
+        "Admin",
+        "Question"
+      ],
+      "scenario": "",
+      "messages": [
+        {
+          "from": "Admin",
+          "to": "Question",
+          "label": "update()",
+          "kind": "call",
+          "line": 115,
+          "src": "Architecture_View.md:115"
+        },
+        {
+          "from": "Question",
+          "to": "Admin",
+          "label": "return success",
+          "kind": "return",
+          "line": 116,
+          "src": "Architecture_View.md:116"
+        }
+      ],
+      "src": "Architecture_View.md:112"
+    },
+    {
+      "diagram": "CollaborationDiagram1",
+      "participants": [
+        "User",
+        "Game",
+        "Question"
+      ],
+      "scenario": "Play Game",
+      "messages": [
+        {
+          "from": "User",
+          "to": "Game",
+          "label": "play()",
+          "kind": "call",
+          "line": 125,
+          "src": "Architecture_View.md:125"
+        },
+        {
+          "from": "Game",
+          "to": "Question",
+          "label": "getPrompt()",
+          "kind": "call",
+          "line": 126,
+          "src": "Architecture_View.md:126"
+        },
+        {
+          "from": "Question",
+          "to": "Game",
+          "label": "return prompt",
+          "kind": "return",
+          "line": 127,
+          "src": "Architecture_View.md:127"
+        },
+        {
+          "from": "Game",
+          "to": "User",
+          "label": "display prompt",
+          "kind": "call",
+          "line": 128,
+          "src": "Architecture_View.md:128"
+        },
+        {
+          "from": "User",
+          "to": "Game",
+          "label": "submit answer",
+          "kind": "call",
+          "line": 129,
+          "src": "Architecture_View.md:129"
+        },
+        {
+          "from": "Game",
+          "to": "Question",
+          "label": "check answer",
+          "kind": "call",
+          "line": 130,
+          "src": "Architecture_View.md:130"
+        },
+        {
+          "from": "Question",
+          "to": "Game",
+          "label": "return result",
+          "kind": "return",
+          "line": 131,
+          "src": "Architecture_View.md:131"
+        },
+        {
+          "from": "Game",
+          "to": "User",
+          "label": "display result",
+          "kind": "call",
+          "line": 132,
+          "src": "Architecture_View.md:132"
+        }
+      ],
+      "src": "Architecture_View.md:121"
+    },
+    {
+      "diagram": "CollaborationDiagram2",
+      "participants": [
+        "Admin",
+        "Question"
+      ],
+      "scenario": "Update Questions",
+      "messages": [
+        {
+          "from": "Admin",
+          "to": "Question",
+          "label": "update()",
+          "kind": "call",
+          "line": 140,
+          "src": "Architecture_View.md:140"
+        },
+        {
+          "from": "Question",
+          "to": "Admin",
+          "label": "return success",
+          "kind": "return",
+          "line": 141,
+          "src": "Architecture_View.md:141"
+        }
+      ],
+      "src": "Architecture_View.md:137"
+    }
+  ],
+  "packages": {
+    "Game": [
+      "Game",
+      "Question"
+    ],
+    "User": [
+      "User"
+    ],
+    "Admin": [
+      "Admin"
+    ]
+  },
+  "deployment": {
+    "nodes": [
+      {
+        "name": "GameServer",
+        "src": "Architecture_View.md:181"
+      },
+      {
+        "name": "QuestionServer",
+        "src": "Architecture_View.md:182"
+      },
+      {
+        "name": "UserClient",
+        "src": "Architecture_View.md:183"
+      },
+      {
+        "name": "AdminClient",
+        "src": "Architecture_View.md:184"
+      }
+    ],
+    "containers": [
+      {
+        "name": "GameContainer",
+        "src": "Architecture_View.md:193"
+      },
+      {
+        "name": "QuestionContainer",
+        "src": "Architecture_View.md:194"
+      },
+      {
+        "name": "UserContainer",
+        "src": "Architecture_View.md:195"
+      },
+      {
+        "name": "AdminContainer",
+        "src": "Architecture_View.md:196"
+      }
+    ],
+    "k8s": [
+      {
+        "src": "Architecture_Documentation.md:133",
+        "valid": true,
+        "kind": "Deployment",
+        "name": "spacefractions",
+        "replicas": 3,
+        "images": [
+          "spacefractions:latest"
+        ],
+        "ports": [
+          80
+        ]
+      },
+      {
+        "src": "Architecture_Documentation.md:277",
+        "valid": true,
+        "kind": "Deployment",
+        "name": "spacefractions",
+        "replicas": 3,
+        "images": [
+          "spacefractions:latest"
+        ],
+        "ports": [
+          80
+        ]
+      }
+    ]
+  },
+  "api": {
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/play",
+        "summary": "Play the game",
+        "response_schema": {
+          "type": "object",
+          "properties": {
+            "gameId": {
+              "type": "integer",
+              "description": "Game ID"
+            }
+          }
+        },
+        "origin": "spec",
+        "src": "Architecture_Documentation.md:83"
+      },
+      {
+        "method": "GET",
+        "path": "/games/{gameId}/question",
+        "summary": "Get the current prompt",
+        "origin": "derived",
+        "derived_from": "SequenceDiagram1: Game->Question getPrompt()",
+        "src": "Architecture_View.md:102"
+      },
+      {
+        "method": "POST",
+        "path": "/games/{gameId}/answers",
+        "summary": "Submit an answer",
+        "origin": "derived",
+        "derived_from": "SequenceDiagram1: User->Game submit answer",
+        "src": "Architecture_View.md:105"
+      },
+      {
+        "method": "PUT",
+        "path": "/admin/questions",
+        "summary": "Replace the question bank",
+        "origin": "derived",
+        "derived_from": "SequenceDiagram2: Admin->Question update()",
+        "src": "Architecture_View.md:115"
+      },
+      {
+        "method": "GET",
+        "path": "/games/{gameId}/score",
+        "summary": "View Score",
+        "origin": "derived",
+        "derived_from": "use case ViewScore",
+        "src": "Architecture_View.md:4"
+      },
+      {
+        "method": "GET",
+        "path": "/admin/questions",
+        "summary": "List questions (needed before updating)",
+        "origin": "derived",
+        "derived_from": "use case UpdateQuestions",
+        "src": "Architecture_View.md:4"
+      },
+      {
+        "method": "GET",
+        "path": "/help",
+        "summary": "View Help",
+        "origin": "derived",
+        "derived_from": "use case ViewHelp",
+        "src": "Architecture_View.md:4"
+      },
+      {
+        "method": "POST",
+        "path": "/games/{gameId}/pause",
+        "summary": "Playing -> Paused",
+        "origin": "derived",
+        "derived_from": "state transition Playing --pause()--> Paused",
+        "src": "Architecture_View.md:68"
+      },
+      {
+        "method": "POST",
+        "path": "/games/{gameId}/resume",
+        "summary": "Paused -> Playing",
+        "origin": "derived",
+        "derived_from": "state transition Paused --resume()--> Playing",
+        "src": "Architecture_View.md:68"
+      },
+      {
+        "method": "POST",
+        "path": "/games/{gameId}/quit",
+        "summary": "Paused -> GameOver",
+        "origin": "derived",
+        "derived_from": "resolved transition Paused --quit()--> GameOver",
+        "src": "Architecture_View.md:68"
+      }
+    ],
+    "openapi_blocks": [
+      {
+        "src": "Architecture_Documentation.md:83",
+        "section": "External APIs",
+        "valid": true,
+        "sha": "a4a517a0356611f4",
+        "title": "Space Fractions API"
+      },
+      {
+        "src": "Architecture_Documentation.md:242",
+        "section": "L. Deliverables",
+        "valid": true,
+        "sha": "a4a517a0356611f4",
+        "title": "Space Fractions API"
+      }
+    ],
+    "internal": [
+      {
+        "rpcs": [
+          {
+            "service": "GameService",
+            "rpc": "Play",
+            "request": "PlayRequest",
+            "response": "PlayResponse"
+          }
+        ],
+        "messages": {
+          "PlayRequest": [
+            {
+              "type": "int32",
+              "name": "gameId"
+            }
+          ],
+          "PlayResponse": [
+            {
+              "type": "int32",
+              "name": "gameId"
+            }
+          ]
+        },
+        "src": "Architecture_Documentation.md:106",
+        "sha": "13facc859635b160"
+      },
+      {
+        "rpcs": [
+          {
+            "service": "GameService",
+            "rpc": "Play",
+            "request": "PlayRequest",
+            "response": "PlayResponse"
+          }
+        ],
+        "messages": {
+          "PlayRequest": [
+            {
+              "type": "int32",
+              "name": "gameId"
+            }
+          ],
+          "PlayResponse": [
+            {
+              "type": "int32",
+              "name": "gameId"
+            }
+          ]
+        },
+        "src": "Architecture_Documentation.md:264",
+        "sha": "13facc859635b160"
+      }
+    ]
+  },
+  "data": {
+    "tables": [
+      {
+        "table": "games",
+        "columns": [
+          {
+            "name": "id",
+            "type": "SERIAL",
+            "constraints": "PRIMARY KEY"
+          },
+          {
+            "name": "game_state",
+            "type": "JSONB",
+            "constraints": "NOT NULL"
+          }
+        ],
+        "src": "Architecture_Documentation.md:120",
+        "section": "Data model / schema",
+        "sha": "2ca42218c40605fc",
+        "file": "sql/game_ddl.sql"
+      },
+      {
+        "table": "games",
+        "columns": [
+          {
+            "name": "id",
+            "type": "SERIAL",
+            "constraints": "PRIMARY KEY"
+          },
+          {
+            "name": "game_state",
+            "type": "JSONB",
+            "constraints": "NOT NULL"
+          }
+        ],
+        "src": "Architecture_Documentation.md:298",
+        "section": "L. Deliverables",
+        "sha": "2ca42218c40605fc",
+        "file": "sql/game_ddl.sql"
+      },
+      {
+        "table": "questions",
+        "file": "sql/question_ddl.sql",
+        "origin": "resolved",
+        "columns": [
+          {
+            "name": "id",
+            "type": "SERIAL",
+            "constraints": "PRIMARY KEY"
+          },
+          {
+            "name": "prompt",
+            "type": "TEXT",
+            "constraints": "NOT NULL"
+          },
+          {
+            "name": "options",
+            "type": "JSONB",
+            "constraints": "NOT NULL"
+          },
+          {
+            "name": "correct_answer",
+            "type": "TEXT",
+            "constraints": "NOT NULL"
+          }
+        ]
+      }
+    ]
+  },
+  "stack": {
+    "options": [
+      {
+        "category": "Language/runtime",
+        "choice": "Node.js 18-20",
+        "justified_by": "ASR-1",
+        "justification_theme": "data durability",
+        "component": "GameComponent",
+        "src": "Architecture_Documentation.md:52"
+      },
+      {
+        "category": "Web framework",
+        "choice": "Express.js 4-5",
+        "justified_by": "NFR-1",
+        "justification_theme": "performance",
+        "component": "GameComponent",
+        "src": "Architecture_Documentation.md:53"
+      },
+      {
+        "category": "RPC/HTTP",
+        "choice": "RESTful API",
+        "justified_by": "ASR-2",
+        "justification_theme": "security",
+        "component": "GameComponent",
+        "src": "Architecture_Documentation.md:54"
+      },
+      {
+        "category": "Persistence",
+        "choice": "PostgreSQL 14-15",
+        "justified_by": "ASR-1",
+        "justification_theme": "data durability",
+        "component": "GameComponent",
+        "src": "Architecture_Documentation.md:55"
+      },
+      {
+        "category": "Cache",
+        "choice": "Redis 6-7",
+        "justified_by": "NFR-1",
+        "justification_theme": "performance",
+        "component": "GameComponent",
+        "src": "Architecture_Documentation.md:56"
+      },
+      {
+        "category": "Messaging",
+        "choice": "RabbitMQ 3-4",
+        "justified_by": "ASR-2",
+        "justification_theme": "security",
+        "component": "GameComponent",
+        "src": "Architecture_Documentation.md:57"
+      },
+      {
+        "category": "Search",
+        "choice": "Elasticsearch 7-8",
+        "justified_by": "NFR-1",
+        "justification_theme": "performance",
+        "component": "GameComponent",
+        "src": "Architecture_Documentation.md:58"
+      },
+      {
+        "category": "Authn/authz",
+        "choice": "OAuth2",
+        "justified_by": "ASR-2",
+        "justification_theme": "security",
+        "component": "GameComponent",
+        "src": "Architecture_Documentation.md:59"
+      },
+      {
+        "category": "Observability",
+        "choice": "Prometheus 2-3",
+        "justified_by": "NFR-1",
+        "justification_theme": "performance",
+        "component": "GameComponent",
+        "src": "Architecture_Documentation.md:60"
+      },
+      {
+        "category": "CI/CD",
+        "choice": "Jenkins 2-3",
+        "justified_by": "ASR-1",
+        "justification_theme": "data durability",
+        "component": "GameComponent",
+        "src": "Architecture_Documentation.md:61"
+      },
+      {
+        "category": "Container runtime",
+        "choice": "Docker 20-21",
+        "justified_by": "ASR-1",
+        "justification_theme": "data durability",
+        "component": "GameComponent",
+        "src": "Architecture_Documentation.md:62"
+      },
+      {
+        "category": "Infra provisioning",
+        "choice": "Terraform 1-2",
+        "justified_by": "ASR-1",
+        "justification_theme": "data durability",
+        "component": "GameComponent",
+        "src": "Architecture_Documentation.md:63"
+      }
+    ],
+    "recommended": [
+      {
+        "item": "Node.js 18",
+        "src": "Architecture_Documentation.md:66"
+      },
+      {
+        "item": "Express.js 4",
+        "src": "Architecture_Documentation.md:67"
+      },
+      {
+        "item": "PostgreSQL 14",
+        "src": "Architecture_Documentation.md:68"
+      },
+      {
+        "item": "Redis 6",
+        "src": "Architecture_Documentation.md:69"
+      },
+      {
+        "item": "RabbitMQ 3",
+        "src": "Architecture_Documentation.md:70"
+      },
+      {
+        "item": "Elasticsearch 7",
+        "src": "Architecture_Documentation.md:71"
+      },
+      {
+        "item": "OAuth2",
+        "src": "Architecture_Documentation.md:72"
+      },
+      {
+        "item": "Prometheus 2",
+        "src": "Architecture_Documentation.md:73"
+      },
+      {
+        "item": "Jenkins 2",
+        "src": "Architecture_Documentation.md:74"
+      },
+      {
+        "item": "Docker 20",
+        "src": "Architecture_Documentation.md:75"
+      },
+      {
+        "item": "Terraform 1",
+        "src": "Architecture_Documentation.md:76"
+      }
+    ],
+    "justification_issues": [
+      "Architecture_Documentation.md:52",
+      "Architecture_Documentation.md:54",
+      "Architecture_Documentation.md:57",
+      "Architecture_Documentation.md:61",
+      "Architecture_Documentation.md:62"
+    ],
+    "selected": {
+      "runtime": "Node.js 18",
+      "web_framework": "Express 4",
+      "persistence": "Repository interface: in-memory (default) | PostgreSQL 14 (DDL provided)",
+      "desktop_shell": "Electron (task constraint C-1)",
+      "tests": "Jest + supertest",
+      "container": "Docker (node:18-alpine, pinned)",
+      "out_of_scope": [
+        "Redis 6",
+        "RabbitMQ 3",
+        "Elasticsearch 7",
+        "OAuth2 provider",
+        "Prometheus 2",
+        "Jenkins 2",
+        "Terraform 1"
+      ]
+    }
+  },
+  "quality": {
+    "slo": {
+      "slo": {
+        "value": "99.99% uptime",
+        "src": "Architecture_Documentation.md:180"
+      },
+      "error_budget": {
+        "value": "1%",
+        "src": "Architecture_Documentation.md:181",
+        "resolved_value": "0.01%"
+      },
+      "rto": {
+        "value": "1 hour",
+        "src": "Architecture_Documentation.md:182"
+      },
+      "rpo": {
+        "value": "1 hour",
+        "src": "Architecture_Documentation.md:183"
+      }
+    },
+    "risks": [
+      {
+        "risk": "1. Scalability issues",
+        "mitigation": "Implement load balancing and autoscaling",
+        "src": "Architecture_Documentation.md:16"
+      },
+      {
+        "risk": "2. Security vulnerabilities",
+        "mitigation": "Implement encryption and secure authentication",
+        "src": "Architecture_Documentation.md:17"
+      },
+      {
+        "risk": "3. Data loss",
+        "mitigation": "Implement regular backups and data replication",
+        "src": "Architecture_Documentation.md:18"
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "A1",
+        "text": "The game will be played by 1000 users concurrently",
+        "src": "Architecture_Documentation.md:225"
+      },
+      {
+        "id": "A2",
+        "text": "The game will be played for 1 hour per session",
+        "src": "Architecture_Documentation.md:226"
+      }
+    ],
+    "open_questions": [
+      {
+        "text": "What is the expected user growth rate?",
+        "src": "Architecture_Documentation.md:229"
+      },
+      {
+        "text": "What is the expected game session length?",
+        "src": "Architecture_Documentation.md:230"
+      }
+    ]
+  },
+  "testing": {
+    "matrix_src": "Architecture_Documentation.md:191",
+    "components": [
+      "GameComponent",
+      "QuestionComponent"
+    ],
+    "test_types": [
+      "Unit testing",
+      "Integration testing",
+      "Contract testing",
+      "E2E testing",
+      "Chaos testing"
+    ],
+    "cells": [
+      {
+        "test_type": "Unit testing",
+        "component": "GameComponent",
+        "value": "",
+        "src": "Architecture_Documentation.md:193"
+      },
+      {
+        "test_type": "Unit testing",
+        "component": "QuestionComponent",
+        "value": "",
+        "src": "Architecture_Documentation.md:193"
+      },
+      {
+        "test_type": "Integration testing",
+        "component": "GameComponent",
+        "value": "",
+        "src": "Architecture_Documentation.md:194"
+      },
+      {
+        "test_type": "Integration testing",
+        "component": "QuestionComponent",
+        "value": "",
+        "src": "Architecture_Documentation.md:194"
+      },
+      {
+        "test_type": "Contract testing",
+        "component": "GameComponent",
+        "value": "",
+        "src": "Architecture_Documentation.md:195"
+      },
+      {
+        "test_type": "Contract testing",
+        "component": "QuestionComponent",
+        "value": "",
+        "src": "Architecture_Documentation.md:195"
+      },
+      {
+        "test_type": "E2E testing",
+        "component": "GameComponent",
+        "value": "",
+        "src": "Architecture_Documentation.md:196"
+      },
+      {
+        "test_type": "E2E testing",
+        "component": "QuestionComponent",
+        "value": "",
+        "src": "Architecture_Documentation.md:196"
+      },
+      {
+        "test_type": "Chaos testing",
+        "component": "GameComponent",
+        "value": "",
+        "src": "Architecture_Documentation.md:197"
+      },
+      {
+        "test_type": "Chaos testing",
+        "component": "QuestionComponent",
+        "value": "",
+        "src": "Architecture_Documentation.md:197"
+      }
+    ],
+    "resolved_matrix": {
+      "Unit testing": {
+        "GameComponent": "planned",
+        "QuestionComponent": "planned",
+        "UserComponent": "planned",
+        "AdminComponent": "planned"
+      },
+      "Integration testing": {
+        "GameComponent": "planned",
+        "QuestionComponent": "planned",
+        "UserComponent": "planned",
+        "AdminComponent": "planned"
+      },
+      "Contract testing": {
+        "GameComponent": "planned",
+        "QuestionComponent": "planned",
+        "UserComponent": "n/a",
+        "AdminComponent": "planned"
+      },
+      "E2E testing": {
+        "GameComponent": "planned",
+        "QuestionComponent": "n/a",
+        "UserComponent": "n/a",
+        "AdminComponent": "n/a"
+      },
+      "Chaos testing": {
+        "GameComponent": "n/a",
+        "QuestionComponent": "n/a",
+        "UserComponent": "n/a",
+        "AdminComponent": "n/a"
+      }
+    },
+    "notes": {
+      "Contract testing": "every endpoint in the resolved OpenAPI is called by a supertest test",
+      "E2E testing": "full game flow intro -> menu -> questions -> ending, through the API",
+      "Chaos testing": "n/a: single-process desktop build; replaced by failure-injection unit tests (repository errors, invalid state transitions)"
+    }
+  },
+  "deliverables_declared": [
+    {
+      "file": "architecture.md",
+      "src": "Architecture_Documentation.md:234"
+    },
+    {
+      "file": "openapi.yaml",
+      "src": "Architecture_Documentation.md:235"
+    },
+    {
+      "file": "internal.proto",
+      "src": "Architecture_Documentation.md:236"
+    },
+    {
+      "file": "k8s/spacefractions-deployment.yaml",
+      "src": "Architecture_Documentation.md:237"
+    },
+    {
+      "file": "sql/game_ddl.sql",
+      "src": "Architecture_Documentation.md:238"
+    },
+    {
+      "file": "traceability_matrix.csv",
+      "src": "Architecture_Documentation.md:239"
+    },
+    {
+      "file": "sql/question_ddl.sql",
+      "src": "resolved",
+      "origin": "resolved"
+    }
+  ],
+  "review_checklist": [
+    {
+      "text": "All FR/NFR/ASR present in traceability matrix?",
+      "src": "Architecture_Documentation.md:310"
+    },
+    {
+      "text": "OpenAPI + internal API contract included and valid?",
+      "src": "Architecture_Documentation.md:311"
+    },
+    {
+      "text": "Each major component has: responsibilities, stack options (3+), recommended stack + ASR/NFR justification, API contract, and data schema?",
+      "src": "Architecture_Documentation.md:312"
+    },
+    {
+      "text": "k8s snippet present and syntactically valid?",
+      "src": "Architecture_Documentation.md:313"
+    },
+    {
+      "text": "SQL DDLs provided for persisted entities?",
+      "src": "Architecture_Documentation.md:314"
+    },
+    {
+      "text": "Assumptions and open questions clearly listed?",
+      "src": "Architecture_Documentation.md:315"
+    }
+  ],
+  "diagrams": [
+    {
+      "name": "UseCaseDiagram",
+      "kind": "usecase",
+      "view": "ScenarioView",
+      "caption": "Scenario View: Use Case Diagram",
+      "src": "Architecture_View.md:4",
+      "warnings": [],
+      "fingerprint": "fce2d31a6aabd448"
+    },
+    {
+      "name": "ClassDiagram",
+      "kind": "class",
+      "view": "LogicView",
+      "caption": "Logic View: Class Diagram",
+      "src": "Architecture_View.md:24",
+      "warnings": [],
+      "fingerprint": "7a1ad1e8e904b546"
+    },
+    {
+      "name": "ObjectDiagram",
+      "kind": "object",
+      "view": "LogicView",
+      "caption": "Logic View: Object Diagram",
+      "src": "Architecture_View.md:56",
+      "warnings": [
+        {
+          "line": 57,
+          "message": "object diagram uses 'participant' (sequence-diagram keyword); expected 'object'"
+        },
+        {
+          "line": 58,
+          "message": "object diagram uses 'participant' (sequence-diagram keyword); expected 'object'"
+        },
+        {
+          "line": 59,
+          "message": "object diagram uses 'participant' (sequence-diagram keyword); expected 'object'"
+        },
+        {
+          "line": 60,
+          "message": "object diagram uses 'participant' (sequence-diagram keyword); expected 'object'"
+        }
+      ],
+      "fingerprint": "2e5cec2fba686f16"
+    },
+    {
+      "name": "StateDiagram",
+      "kind": "state",
+      "view": "LogicView",
+      "caption": "Logic View: State Diagram",
+      "src": "Architecture_View.md:68",
+      "warnings": [],
+      "fingerprint": "41af57da30d86658"
+    },
+    {
+      "name": "ActivityDiagram",
+      "kind": "activity",
+      "view": "ProcessView",
+      "caption": "Process View: Activity Diagram",
+      "src": "Architecture_View.md:82",
+      "warnings": [],
+      "fingerprint": "a814ebcf57fb8819"
+    },
+    {
+      "name": "SequenceDiagram1",
+      "kind": "sequence",
+      "view": "ProcessView",
+      "caption": "Process View: Sequence Diagram",
+      "src": "Architecture_View.md:97",
+      "warnings": [],
+      "fingerprint": "ed65e21da5abcb4c"
+    },
+    {
+      "name": "SequenceDiagram2",
+      "kind": "sequence",
+      "view": "ProcessView",
+      "caption": "Process View: Sequence Diagram",
+      "src": "Architecture_View.md:112",
+      "warnings": [],
+      "fingerprint": "e9c6c694ecec8d9f"
+    },
+    {
+      "name": "CollaborationDiagram1",
+      "kind": "sequence",
+      "view": "ProcessView",
+      "caption": "Process View: Collaboration Diagram",
+      "src": "Architecture_View.md:121",
+      "warnings": [],
+      "fingerprint": "ed65e21da5abcb4c"
+    },
+    {
+      "name": "CollaborationDiagram2",
+      "kind": "sequence",
+      "view": "ProcessView",
+      "caption": "Process View: Collaboration Diagram",
+      "src": "Architecture_View.md:137",
+      "warnings": [],
+      "fingerprint": "e9c6c694ecec8d9f"
+    },
+    {
+      "name": "PackageDiagram",
+      "kind": "package",
+      "view": "DevelopmentView",
+      "caption": "Development View: Package Diagram",
+      "src": "Architecture_View.md:149",
+      "warnings": [],
+      "fingerprint": "d8bdd7b9c69c8f4d"
+    },
+    {
+      "name": "ComponentDiagram",
+      "kind": "component",
+      "view": "DevelopmentView",
+      "caption": "Development View: Component Diagram",
+      "src": "Architecture_View.md:166",
+      "warnings": [],
+      "fingerprint": "94a7fcaf6f440baa"
+    },
+    {
+      "name": "DeploymentDiagram",
+      "kind": "deployment",
+      "view": "PhysicalView",
+      "caption": "Physical View: Deployment Diagram",
+      "src": "Architecture_View.md:180",
+      "warnings": [],
+      "fingerprint": "da71fcae66fb5c2d"
+    },
+    {
+      "name": "ContainerDiagram",
+      "kind": "container",
+      "view": "PhysicalView",
+      "caption": "Physical View: Container Diagram",
+      "src": "Architecture_View.md:192",
+      "warnings": [],
+      "fingerprint": "5a2b0573a973b6b9"
+    }
+  ],
+  "resolutions": [
+    {
+      "finding": "F-01",
+      "rule": "SL-01",
+      "change": "added deliverable sql/question_ddl.sql"
+    },
+    {
+      "finding": "F-01",
+      "rule": "SL-01",
+      "change": "added table 'questions' (id, prompt, options, correct_answer) in sql/question_ddl.sql"
+    },
+    {
+      "finding": "F-02",
+      "rule": "SL-02",
+      "change": "added traceability row for ASR-2 -> UserComponent"
+    },
+    {
+      "finding": "F-03",
+      "rule": "SL-05",
+      "change": "filled testing matrix for all components (see testing.resolved_matrix)"
+    },
+    {
+      "finding": "F-04",
+      "rule": "SL-11",
+      "change": "Question: added attribute correctAnswer and method checkAnswer()"
+    },
+    {
+      "finding": "F-05",
+      "rule": "SL-13",
+      "change": "error budget 1% -> 0.01% (= 100% - 99.99%)"
+    },
+    {
+      "finding": "F-06",
+      "rule": "SL-04",
+      "change": "AdminComponent.responsibility = 'handles update questions for the Admin actor' (inferred from use cases)"
+    },
+    {
+      "finding": "F-07",
+      "rule": "SL-06",
+      "change": "marked 5 stack justifications as unreliable"
+    },
+    {
+      "finding": "F-08",
+      "rule": "SL-07",
+      "change": "inferred requirement FR-2 'View Score' from use case ViewScore"
+    },
+    {
+      "finding": "F-08",
+      "rule": "SL-07",
+      "change": "inferred requirement FR-3 'Update Questions' from use case UpdateQuestions"
+    },
+    {
+      "finding": "F-08",
+      "rule": "SL-07",
+      "change": "inferred requirement FR-4 'View Help' from use case ViewHelp"
+    },
+    {
+      "finding": "F-09",
+      "rule": "SL-08",
+      "change": "inferred requirement FR-5 (experience flow) and 4 UI screens"
+    },
+    {
+      "finding": "F-10",
+      "rule": "SL-09",
+      "change": "derived endpoint GET /games/{gameId}/question  <- SequenceDiagram1: Game->Question getPrompt()"
+    },
+    {
+      "finding": "F-10",
+      "rule": "SL-09",
+      "change": "derived endpoint POST /games/{gameId}/answers  <- SequenceDiagram1: User->Game submit answer"
+    },
+    {
+      "finding": "F-10",
+      "rule": "SL-09",
+      "change": "derived endpoint PUT /admin/questions  <- SequenceDiagram2: Admin->Question update()"
+    },
+    {
+      "finding": "F-10",
+      "rule": "SL-09",
+      "change": "derived endpoint GET /games/{gameId}/score  <- use case ViewScore"
+    },
+    {
+      "finding": "F-10",
+      "rule": "SL-09",
+      "change": "derived endpoint GET /admin/questions  <- use case UpdateQuestions"
+    },
+    {
+      "finding": "F-10",
+      "rule": "SL-09",
+      "change": "derived endpoint GET /help  <- use case ViewHelp"
+    },
+    {
+      "finding": "F-10",
+      "rule": "SL-09",
+      "change": "derived endpoint POST /games/{gameId}/pause  <- state transition Playing --pause()--> Paused"
+    },
+    {
+      "finding": "F-10",
+      "rule": "SL-09",
+      "change": "derived endpoint POST /games/{gameId}/resume  <- state transition Paused --resume()--> Playing"
+    },
+    {
+      "finding": "F-11",
+      "rule": "SL-10",
+      "change": "Game.id: string -> int"
+    },
+    {
+      "finding": "F-11",
+      "rule": "SL-10",
+      "change": "Question.id: string -> int"
+    },
+    {
+      "finding": "F-11",
+      "rule": "SL-10",
+      "change": "User.id: string -> int"
+    },
+    {
+      "finding": "F-11",
+      "rule": "SL-10",
+      "change": "Admin.id: string -> int"
+    },
+    {
+      "finding": "F-12",
+      "rule": "SL-12",
+      "change": "Question: added service method updateQuestions(questions)"
+    },
+    {
+      "finding": "F-13",
+      "rule": "SL-14",
+      "change": "marked GameOver as final state (GameOver --> [*])"
+    },
+    {
+      "finding": "F-13",
+      "rule": "SL-14",
+      "change": "added transition Paused --quit()--> GameOver"
+    },
+    {
+      "finding": "F-13",
+      "rule": "SL-14",
+      "change": "derived endpoint POST /games/{gameId}/quit"
+    },
+    {
+      "finding": "F-15",
+      "rule": "SL-17",
+      "change": "deployment model: modular monolith, 1 image, pinned tag"
+    },
+    {
+      "finding": "F-21",
+      "rule": "SL-21",
+      "change": "selected MVP stack; 7 infrastructure items documented as out of scope"
+    }
+  ],
+  "ui": {
+    "screens": [
+      {
+        "id": "S1",
+        "name": "introductory movie"
+      },
+      {
+        "id": "S2",
+        "name": "main menu"
+      },
+      {
+        "id": "S3",
+        "name": "series of fraction questions"
+      },
+      {
+        "id": "S4",
+        "name": "ending scene with feedback"
+      }
+    ],
+    "requirement": "FR-5"
+  },
+  "lint_summary": {
+    "error": 5,
+    "warning": 10,
+    "info": 6
+  },
+  "constraints": [
+    {
+      "id": "C-1",
+      "text": "The generated game is a desktop application, not a web application",
+      "source": "evaluator email",
+      "realised_by": "Electron shell around the Express app; packaged as a Windows .exe"
+    },
+    {
+      "id": "C-2",
+      "text": "Total LLM token cost per run stays under 1 USD on DeepSeek",
+      "source": "evaluator email",
+      "realised_by": "ArchForge budget guard (archforge/llm.py)"
+    },
+    {
+      "id": "C-3",
+      "text": "The LLM is deepseek-v4-pro via the official API",
+      "source": "Task1-EN.docx",
+      "realised_by": "archforge/config.py default model"
+    },
+    {
+      "id": "C-4",
+      "text": "Outputs: project layout + full source, dependency manifest, README, tests, optional Dockerfile",
+      "source": "Task1-EN.docx",
+      "realised_by": "planner deliverables checklist"
+    },
+    {
+      "id": "C-5",
+      "text": "Follow the architecture's stack where proportionate: Node.js 18 + Express 4",
+      "source": "Architecture_Documentation.md (recommended stack)",
+      "realised_by": "selected stack (SL-21)"
+    }
+  ]
+}

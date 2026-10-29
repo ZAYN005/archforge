@@ -1,0 +1,14 @@
+Requirement ID,Origin,Text,Code files,Tests passed,Tests failed,Status
+ASR-1,spec,Data durability,src/store/fileStore.js;src/store/memoryStore.js,3,0,PASS
+ASR-2,spec,security,src/components/admin/adminRoutes.js,6,0,PASS
+FR-1,spec,Play game,src/components/game/gameRoutes.js;src/components/game/gameService.js;src/components/user/userService.js;src/domain/fraction.js;src/domain/gameStateMachine.js;src/domain/questionPresenter.js;src/domain/seedQuestions.js,30,1,FAIL
+NFR-1,spec,Performance,src/app.js;src/server.js,1,0,PASS
+FR-2,inferred,View Score,src/components/game/gameRoutes.js;src/components/game/gameService.js,4,1,FAIL
+FR-3,inferred,Update Questions,src/components/admin/adminRoutes.js;src/components/question/questionService.js,2,0,PASS
+FR-4,inferred,View Help,src/app.js,1,0,PASS
+FR-5,inferred,Experience flow: introductory movie -> main menu -> series of fraction questions -> ending scene with feedback,electron/main.js;electron/preload.js,3,0,PASS
+C-1,constraint,"The generated game is a desktop application, not a web application",electron/main.js,1,0,PASS
+C-2,constraint,Total LLM token cost per run stays under 1 USD on DeepSeek,,1,0,PASS
+C-3,constraint,The LLM is deepseek-v4-pro via the official API,,1,0,PASS
+C-4,constraint,"Outputs: project layout + full source, dependency manifest, README, tests, optional Dockerfile",,1,0,PASS
+C-5,constraint,Follow the architecture's stack where proportionate: Node.js 18 + Express 4,,1,0,PASS
